@@ -1,0 +1,51 @@
+{% extends "main/layout2.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    /* Enhance the form appearance to align with the bakery theme */
+    .form {
+        background-color: #fff5e6; /* Creamy background for a cozy, inviting feel */
+        padding: 20px;
+        border-radius: 8px; /* Soft, rounded corners for approachability */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth and separation */
+    }
+    .border-bottom {
+        border-bottom: 2px solid #d67c5b; /* Warm, inviting color for the form legend */
+    }
+    .btn-outline-info {
+        border-color: #d67c5b; /* Harmonizing the button border with the theme */
+        color: #d67c5b;
+    }
+    .btn-outline-info:hover {
+        background-color: #d67c5b; /* Adding a warm background color on hover */
+        color: white; /* Ensuring text contrast for readability */
+    }
+    /* Additional styles to ensure form controls are visually integrated */
+    .form-control {
+        border-radius: 0.25rem; /* Slightly rounded borders for input fields */
+        border: 1px solid #d67c5b; /* Matching input border color with the theme */
+        color: #5a4a42; /* Text color that complements the overall design */
+    }
+    label {
+        color: #5a4a42; /* Ensuring labels are readable and in theme */
+    }
+</style>
+<div class="form">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Add Item</legend>
+                        {{ form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

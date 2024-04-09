@@ -1,0 +1,92 @@
+{% extends "main/layout.html" %}
+{% block content %}
+<style>
+    /* Enhancing styles for dish detail and review sections */
+    .container {
+        padding-top: 20px;
+    }
+    .main {
+        background-color: #fff5e6; /* Creamy background to match the bakery theme */
+    }
+    .information, .reviews {
+        background-color: #fde8cd; /* Light background for sections */
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    }
+    .badge {
+        background-color: #d67c5b; /* Warm accent color for labels */
+        color: #fff;
+    }
+    .btn-danger {
+        background-color: #bf9478; /* A softer, more inviting button color */
+        border-color: #bf9478; /* Ensure the border matches */
+    }
+    .main-reviews {
+        background-color: #ffe5d1; /* Even lighter shade for reviews */
+        margin-bottom: 10px;
+        border-radius: 8px; /* Rounded corners for a softer look */
+    }
+    .user_details h3, .user_details p {
+        margin-bottom: 0; /* Adjust spacing for user details */
+    }
+</style>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1 class="text-center my-4">Dishes</h1>
+      <div class="dishes">
+        <main class="mt-3 pt-4 main">
+          <div class="container dark-grey-text">
+            <div class="row wow fadeIn">
+              <div class="col-md-12 mb-4 text-center">
+                <img src="{{ item.image.url }}" class="img-fluid mt-4" alt="{{ item.title }}">
+              </div>
+            </div>
+            <div class="row wow fadeIn">
+              <div class="col-md-12 mb-4 information">
+                <div class="p-4 content">
+                  <h2 class="mb-3"><u>{{ item.title }}</u><span class="badge ml-2">{{ item.labels }}</span></h2>
+                  {% if item.description %}
+                  <p>{{ item.description }}</p>
+                  {% endif %}
+                  <h3 class="mb-3">€ {{ item.price }} per box of {{ item.pieces }} pieces</h3>
+                  <p>{{ item.instructions }}</p>
+                  <a href="{% url 'main:add-to-cart' item.slug %}" class="btn btn-danger btn-md my-0 p">Add to cart</a>
+                </div>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </main>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h1 class="text-center my-4">Reviews</h1>
+      <form action="{% url 'main:add_reviews' %}" method="POST" class="mb-3">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-sm-11">
+            <input type="text" name="review" class="form-control" placeholder="Enter Your Review">
+            <input type="hidden" name="rslug" value="{{ item.slug }}">
+          </div>
+          <div class="col-sm-1">
+            <button type="submit" class="btn btn-danger">Submit</button>
+          </div>
+        </div>
+      </form>
+      {% for review in reviews %}
+      <div class="reviews card  mb-3">
+        <div class="card-body">
+          <div class="user_details" style="display: flex; border-bottom: 1px solid #c9c9c9;">
+            <h3 class="mr-3">{{ review.user.username }}</h3>
+            <p class="mt-2">{{ review.posted_on }}</p>
+          </div>
+          <p>{{ review.review }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

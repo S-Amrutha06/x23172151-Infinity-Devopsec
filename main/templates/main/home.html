@@ -1,0 +1,83 @@
+{% extends "main/layout.html" %}
+{% block content %}
+<style>
+    /* Warm and inviting bakery theme styles */
+    .home {
+        background-color: #fff5e6; /* Creamy background */
+    }
+    .feature-section {
+        background: url('../media/bakery_feature_image.jpg') no-repeat center center;
+        background-size: cover;
+        padding: 100px 0;
+        color: #5a4a42;
+        text-align: center;
+        position: relative;
+    }
+    .feature-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 245, 230, 0.9); /* Light overlay for better text visibility */
+    }
+    .feature-section h1 {
+        font-family: 'Cookie', cursive;
+        font-size: 3em;
+        position: relative;
+        color: #d67c5b;
+        z-index: 1;
+    }
+    .card {
+        background-color: #fde8cd;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .card img {
+        border-radius: 15px 15px 0 0;
+    }
+    .card .btn-warning {
+        background-color: #d67c5b;
+        border: none;
+    }
+    .card-title a, .card-text, .text-center h1 {
+        color: #5a4a42;
+    }
+    .btn-info.btn-danger {
+        background-color: #bf9478;
+        border: none;
+    }
+    .badge {
+        background-color: #f3d2b2;
+        color: #5a4a42;
+        border: none;
+    }
+</style>
+<div class="home">
+    <div class="feature-section">
+        <h1>Welcome to Bakery Infinity</h1>
+        <p>Delight in every bite</p>
+    </div>
+    <div class="container">
+        <h1 class="text-center text-dark mb-3">Our Delicious Menu</h1>
+        <div class="row">
+            {% for item in menu_items %}
+            <div class="col-sm-4">
+                <div class="card mb-3">
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.title }}">
+                    <div class="card-body text-center">
+                        <button class="btn btn-warning">By:{{ item.created_by }}</button>
+                        <h5 class="card-title"><a href="{% url 'main:dishes' item.slug %}">{{ item.title }}</a><span class="badge badge-{{ item.label_colour }}">{{ item.labels }}</span></h5>
+                        <p class="card-text">{{ item.description }}</p>
+                        <h5 class="text-center">€ {{ item.price }}</h5>
+                        <a href="{% url 'main:dishes' item.slug %}" class="btn btn-info btn-danger">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

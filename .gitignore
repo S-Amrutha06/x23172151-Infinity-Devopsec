@@ -1,0 +1,51 @@
+# Django project files
+*.pyc
+*.pyo
+__pycache__/
+*.sqlite3
+
+# Static files
+; staticfiles/
+; media/
+
+# Virtual environment
+venv/
+.env
+
+# Development server
+.env.dev
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Dependency directories
+node_modules/
+bower_components/
+migrations/
+
+# Compiled files
+*.pyc
+*.class
+*.war
+*.ear
+*.jar
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.db.sqlite3
+
+# Testing files
+.coverage
+.pytest_cache/
+
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

@@ -1,0 +1,48 @@
+{% extends "main/layout.html" %}
+{% load crispy_forms_tags %} 
+{% block content %}
+<style>
+    .container h1 {
+        color: #5a4a42; /* Dark brown text for a warm, inviting feel */
+    }
+    .card {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Soft shadow for depth */
+        border-radius: 10px; /* Rounded corners for a friendlier look */
+    }
+    .card-body {
+        background-color: #fde8cd; /* Light, warm background color */
+        color: #5a4a42; /* Dark brown text for contrast and readability */
+    }
+    .btn-danger {
+        background-color: #d67c5b; /* Warm, inviting button color */
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for the button */
+    }
+    .btn-danger:hover {
+        background-color: #bf9478; /* Slightly lighter shade on hover for a dynamic effect */
+    }
+    input[type="submit"] {
+        background-color: #d67c5b; /* Ensuring consistency with other buttons */
+        color: white; /* White text for clarity */
+    }
+    label {
+        color: #5a4a42; /* Ensuring form labels are also in theme color */
+    }
+</style>
+<div class="container">
+    <h1 class="text-center my-4 fw-bolder">Signup</h1>
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <div class="card">
+                <div class="card-body">
+                    <form class="site-form" action="{% url 'accounts:signup' %}" method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <input type="submit" value="Signup" class="btn btn-danger btn-block mt-4">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "main/layout.html" %}
+{% block content %}
+<style>
+    .cart h3, .cart h4, .cart h6 {
+        color: #5a4a42; /* Warm, dark brown color */
+        font-family: 'Cookie', cursive; /* A playful, bakery-friendly font */
+    }
+    .table {
+        background-color: #fff5e6; /* A light, creamy background color */
+        color: #5a4a42; /* Complementing text color */
+    }
+    .table th {
+        font-family: 'Montserrat', sans-serif;
+    }
+    .badge {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #f3d2b2; /* A light, warm color for labels */
+        color: #5a4a42; /* Dark text for contrast */
+    }
+    .alert {
+        background-color: #fde8cd; /* Soft background for alerts */
+        border-color: #f3d2b2; /* Border color to match the theme */
+        color: #5a4a42; /* Text color to ensure readability */
+    }
+</style>
+<div class="cart">
+    <div class="container">
+        <!-- Active Orders Section -->
+        <div class="row">
+            <div class="col-sm-12 mt-5">
+                <h3 class="text-center">Your Active Orders</h3>
+                {% if items %}
+                <!-- Content when items are present -->
+                {% else %}
+                <h4 class="text-center">Sorry, you have not ordered any item yet!!!</h4>
+                {% endif %}
+            </div>
+        </div>
+        <!-- Past Orders Section -->
+        <div class="row">
+            <div class="col-sm-12 mt-5">
+                <h3 class="text-center">Past Orders</h3>
+                {% if cart_items %}
+                <!-- Content when cart_items are present -->
+                {% else %}
+                <div class="alert alert-info text-center" role="alert">
+                    <h4 class="alert-heading">Oh no, it's empty here!</h4>
+                    <p>Looks like you haven't ordered anything yet. Why not check out our products and find something you like?</p>
+                  </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

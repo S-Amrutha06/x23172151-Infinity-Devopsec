@@ -1,0 +1,75 @@
+{% extends "main/layout2.html" %}
+{% block content %}
+<style>
+    .cart {
+        padding: 20px;
+    }
+    .table-dark {
+        background-color: #fde8cd; /* A lighter, creamy background for the table */
+        color: #5a4a42; /* A warm, dark brown for text to complement the bakery theme */
+    }
+    thead {
+        background-color: #d67c5b; /* A warm, rustic red for the table headers */
+        color: #ffffff; /* White text for contrast */
+    }
+    .btn-success {
+        background-color: #f3d2b2; /* Soft, warm tone for the update button */
+        border-color: #f3d2b2; /* Matching border */
+        color: #5a4a42; /* Dark brown text for easy readability */
+    }
+    .btn-success:hover {
+        background-color: #e7c4a8; /* Slightly darker on hover for a subtle effect */
+    }
+    .btn-danger {
+        background-color: #bf9478; /* A more subdued tone for the delete button, ensuring it's not too jarring */
+        border-color: #bf9478; /* Matching border */
+    }
+    .btn-danger:hover {
+        background-color: #a5836d; /* Darker on hover for visual feedback */
+    }
+    .badge {
+        background-color: #f3d2b2; /* Light, warm background for badges */
+        color: #5a4a42; /* Complementary text color for contrast */
+    }
+</style>
+<div class="cart">
+    <div class="row">
+        <div class="col-sm-12">
+            {% if items %}
+            <div class="table-responsive">
+                <table class="table table-dark">
+                    <thead>
+                    <tr>
+                        <td scope="col">Item No.</td>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Instructions</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Pieces</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.title }} <span class="badge badge-{{ item.label_colour }}">{{ item.labels }}</span></td>
+                        <td>{{ item.description }}</td>
+                        <td>{{ item.instructions }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.pieces }} pieces</td>
+                        <td><a class="btn btn-success" href="{% url 'main:item-update' item.slug %}">Update</a></td>
+                        <td><a class="btn btn-danger" href="{% url 'main:item-delete' item.slug %}">Delete</a></td>
+                    </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <h4 class="text-center">Sorry, you have not ordered any item yet!</h4>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

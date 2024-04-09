@@ -1,0 +1,45 @@
+{% extends "main/layout.html" %}
+{% block content %}
+<style>
+    /* Enhancing the Delete Cart Item page to match the bakery theme */
+    .content-section {
+        background-color: #fff5e6; /* Light, creamy background color */
+        padding: 30px;
+        border-radius: 10px; /* Rounded corners for a softer look */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+        margin-top: 20px;
+    }
+    .border-bottom {
+        border-bottom: 2px solid #d67c5b; /* Warm accent color */
+    }
+    .btn-outline-danger {
+        border-color: #d67c5b; /* Matching the warm theme */
+        color: #d67c5b;
+    }
+    .btn-outline-danger:hover {
+        background-color: #d67c5b; /* Warm accent color for hover */
+        color: #fff;
+    }
+    .btn-outline-secondary {
+        border-color: #f3d2b2; /* Light warm border color */
+        color: #5a4a42; /* Darker text color for contrast */
+    }
+    .btn-outline-secondary:hover {
+        background-color: #f3d2b2; /* Light warm background on hover */
+        color: #5a4a42;
+    }
+</style>
+<div class="content-section container">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Delete Cart Item</legend>
+            <h2>Are you sure you want to delete the item "{{ object.item.title }}"?</h2>
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+            <a class="btn btn-outline-secondary" href="{% url 'main:cart' %}">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock content %}
