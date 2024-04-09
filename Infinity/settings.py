@@ -25,7 +25,7 @@ SECRET_KEY = 'v7)ouo@=dhswvnfs!@o$v07^m^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['x23172151-Infinity-Devopsec-dev.eu-north-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
